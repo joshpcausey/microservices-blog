@@ -5,9 +5,9 @@ metadata:
 spec:
   replicas: 1
   selector:
-    matchLabels:
+    matchLabels: # Find all the Pods with the label "app: posts"
       app: posts
-  template:
+  template: # Describe the config of the Pod we want to create
     metadata:
       labels:
         app: posts
@@ -15,17 +15,3 @@ spec:
       containers:
         - name: posts
           image: joshcausey/posts
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: posts-clusterip-srv
-spec:
-  selector:
-    app: posts
-    type: ClusterIP # not required.
-  ports:
-    - name: posts
-      protocol: TCP
-      port: 4000
-      targetPort: 40001
